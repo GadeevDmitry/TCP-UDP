@@ -5,7 +5,7 @@ def Print_message_from_server(sock):
     if not message:
         return False
 
-    print(str(message))
+    print(message.decode("utf-8"))
     return True
 
 Welcome_from_server = Print_message_from_server
