@@ -5,7 +5,7 @@ NUMBER_MIN = 1
 NUMBER_MAX = 100
 
 def Welcome_client(connect_sock):
-    welcome_message = "Welcome, TCP-client!\nGuess the number from 1 to 100."
+    welcome_message = f"Welcome, TCP-client!\nGuess the number from {NUMBER_MIN} to {NUMBER_MAX}."
     connect_sock.sendall(welcome_message)
 
 def Handle_client_attempt(connect_sock, hidden_number, client_attempt):
