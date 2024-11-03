@@ -5,7 +5,7 @@ def Print_message_from_server(sock):
     if not message:
         return False
 
-    print(message)
+    print(str(message))
     return True
 
 Welcome_from_server = Print_message_from_server
@@ -22,7 +22,7 @@ def Client():
 
             while True:
                 client_attempt = input()[: 100]
-                sock.sendall(client_attempt)
+                sock.sendall(str.encode(client_attempt))
 
                 if not Response_on_attempt(sock):
                     break

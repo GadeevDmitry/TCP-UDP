@@ -6,7 +6,7 @@ NUMBER_MAX = 100
 
 def Welcome_client(connect_sock):
     welcome_message = f"Welcome, TCP-client!\nGuess the number from {NUMBER_MIN} to {NUMBER_MAX}."
-    connect_sock.sendall(welcome_message)
+    connect_sock.sendall(str.encode(welcome_message))
 
 def Handle_client_attempt(connect_sock, hidden_number, client_attempt):
     response_message = ""
@@ -32,7 +32,7 @@ def Handle_client_attempt(connect_sock, hidden_number, client_attempt):
             response_message = "Hidden number is lower"
 
         break
-    connect_sock.sendall(response_message)
+    connect_sock.sendall(str.encode(response_message))
 
     return is_guessed
 
@@ -56,7 +56,7 @@ def Server():
                     if not client_attempt:
                         break
 
-                    if Handle_client_attempt(connect_sock, hidden_number, client_attempt):
+                    if Handle_client_attempt(connect_sock, hidden_number, str(client_attempt)):
                         hidden_number = Start_new_game()
             finally:
                 connect_sock.close()
