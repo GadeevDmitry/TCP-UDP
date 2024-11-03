@@ -56,7 +56,7 @@ def Server():
                     if not client_attempt:
                         break
 
-                    if Handle_client_attempt(connect_sock, hidden_number, str(client_attempt)):
+                    if Handle_client_attempt(connect_sock, hidden_number, client_attempt.decode("utf-8")):
                         hidden_number = Start_new_game()
             finally:
                 connect_sock.close()
