@@ -59,11 +59,9 @@ def Server():
                     if Handle_client_attempt(connect_sock, hidden_number, client_attempt):
                         hidden_number = Start_new_game()
             finally:
-                print("connect_sock.close()")
                 connect_sock.close()
                 raise
     finally:
-        print("server_sock.close()")
         server_sock.close()
 
 if __name__ == "__main__":
