@@ -60,7 +60,6 @@ def Server():
                         hidden_number = Start_new_game()
             finally:
                 connect_sock.close()
-                raise
     finally:
         server_sock.close()
 
