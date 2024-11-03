@@ -4,11 +4,17 @@ import socket
 NUMBER_MIN = 1
 NUMBER_MAX = 100
 
+DEBUG_PRINT = print
+
 def Welcome_client(connect_sock):
     welcome_message = f"Welcome, TCP-client!\nGuess the number from {NUMBER_MIN} to {NUMBER_MAX}."
+
+    DEBUG_PRINT("DEBUG: sending welcome-message:\n", welcome_message, "\n======")
     connect_sock.sendall(str.encode(welcome_message))
 
 def Handle_client_attempt(connect_sock, hidden_number, client_attempt):
+    DEBUG_PRINT("DEBUG: received:\n", client_attempt, "\n======")
+
     response_message = ""
     is_guessed       = False
 
@@ -32,6 +38,8 @@ def Handle_client_attempt(connect_sock, hidden_number, client_attempt):
             response_message = "Hidden number is lower"
 
         break
+
+    DEBUG_PRINT("DEBUG: responding:\n", response_message, "\n======")
     connect_sock.sendall(str.encode(response_message))
 
     return is_guessed
@@ -43,6 +51,7 @@ def Server():
     server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_sock.bind(("localhost", 1000))
 
+    DEBUG_PRINT("DEBUG: listening", "\n======")
     server_sock.listen(1)
     try:
         while True:
@@ -54,13 +63,16 @@ def Server():
                 while True:
                     client_attempt = connect_sock.recv(100)
                     if not client_attempt:
+                        DEBUG_PRINT("DEBUG: received message is empty", "\n======")
                         break
 
                     if Handle_client_attempt(connect_sock, hidden_number, client_attempt.decode("utf-8")):
                         hidden_number = Start_new_game()
             finally:
+                DEBUG_PRINT("DEBUG: closing connection with client", "\n======")
                 connect_sock.close()
     finally:
+        DEBUG_PRINT("DEBUG: closing listening", "\n======")
         server_sock.close()
 
 if __name__ == "__main__":

@@ -1,5 +1,7 @@
 import socket
 
+DEBUG_PRINT = print
+
 def Print_message_from_server(sock):
     message = sock.recv(100)
     if not message:
@@ -22,12 +24,15 @@ def Client():
 
             while True:
                 client_attempt = input()[: 100]
+
+                DEBUG_PRINT("DEBUG: sending attempt:\n", client_attempt, "\n======")
                 sock.sendall(str.encode(client_attempt))
 
                 if not Response_on_attempt(sock):
                     break
             break
     finally:
+        DEBUG_PRINT("DEBUG: closing connection with server", "\n======")
         sock.close()
 
 if __name__ == "__main__":
