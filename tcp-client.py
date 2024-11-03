@@ -13,7 +13,7 @@ Response_on_attempt = Print_message_from_server
 
 def Client():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.connect(("server", 1000))
+    sock.connect(("localhost", 1000))
 
     try:
         while True:

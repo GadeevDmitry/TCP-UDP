@@ -41,7 +41,7 @@ def Start_new_game():
 
 def Server():
     server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_sock.bind(("server", 1000))
+    server_sock.bind(("localhost", 1000))
 
     server_sock.listen(1)
     try:
