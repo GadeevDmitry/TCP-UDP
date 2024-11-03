@@ -25,14 +25,14 @@ def Client():
             while True:
                 client_attempt = input()[: 100]
 
-                DEBUG_PRINT("DEBUG: sending attempt:\n", client_attempt, "\n======")
+                DEBUG_PRINT("DEBUG: sending attempt:\n", client_attempt, "\n======", sep="")
                 sock.sendall(str.encode(client_attempt))
 
                 if not Response_on_attempt(sock):
                     break
             break
     finally:
-        DEBUG_PRINT("DEBUG: closing connection with server", "\n======")
+        DEBUG_PRINT("DEBUG: closing connection with server", "\n======", sep="")
         sock.close()
 
 if __name__ == "__main__":
